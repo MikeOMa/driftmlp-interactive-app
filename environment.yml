@@ -1,0 +1,7 @@
+name: driftmlp-interactive-app 
+channels:
+  - conda-forge
+dependencies:
+  - cartopy==0.20.0
+  - pip:
+    - -r requirements.txt
