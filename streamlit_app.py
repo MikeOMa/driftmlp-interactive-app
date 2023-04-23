@@ -57,6 +57,10 @@ class interactive_app:
 
 app = interactive_app()
 
+REMAP_LABELS = {"lon_from": "From Longitude",
+                 "lat_from": "From Latitude",
+                   "lon_to": "To Longitude",
+                     "lat_to": "To Latitude"}
 
 def slider_text_pair(
     label="lon_from", value=-38.35, extreme=180.0, show_text_input=True
@@ -76,7 +80,7 @@ def slider_text_pair(
         setattr(st.session_state, label + "_text", getattr(st.session_state, label))
 
     slider = st.slider(
-        label=label,
+        label=REMAP_LABELS[label],
         key=label,
         min_value=-extreme,
         max_value=extreme,
@@ -85,7 +89,7 @@ def slider_text_pair(
     )
     if show_text_input:
         text_input = st.number_input(
-            label=label,
+            label="",
             key=label + "_text",
             min_value=-extreme,
             max_value=extreme,
@@ -95,7 +99,6 @@ def slider_text_pair(
         )
 
     return slider
-
 
 tab1, tab2 = st.tabs(["🌍 Map", "📖	About"])
 with tab1:
