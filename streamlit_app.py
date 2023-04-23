@@ -171,4 +171,9 @@ with tab2:
     Or read the paper at
 
     O’Malley, M., A. M. Sykulski, R. Laso-Jadart, and M. Madoui, 2021: Estimating the Travel Time and the Most Likely Path from Lagrangian Drifters. J. Atmos. Oceanic Technol., 38, 1059–1073, https://doi.org/10.1175/JTECH-D-20-0134.1.
+    
+
+    **Source code of this app**
+
+    https://github.com/MikeOMa/driftmlp-interactive-app 
     """
