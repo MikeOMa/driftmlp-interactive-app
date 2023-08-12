@@ -11,6 +11,9 @@ For instructions on how to create a local development environment see the mamba 
 This repository deploys the application on google cloud:
 [Google cloud link](https://drifter-pathways-4nrsdzn57q-uc.a.run.app/)
 
+Deployed by
+`make deploy` 
+
 # Link on NOAA website with extra information
 
 [Derived pathways ](https://www.aoml.noaa.gov/phod/gdp/derived_pathways.php)
