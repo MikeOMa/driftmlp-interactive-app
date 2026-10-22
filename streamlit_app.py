@@ -6,6 +6,20 @@ import driftmlp
 import folium
 
 
+def use_carto_tiles(map_object):
+    """Replace Folium's default tiles with the same-origin Carto tile proxy."""
+    for name, layer in list(map_object._children.items()):
+        if isinstance(layer, folium.TileLayer):
+            del map_object._children[name]
+    folium.TileLayer(
+        tiles="/tiles/{z}/{x}/{y}.png",
+        attr='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+        name="Carto Positron",
+        max_zoom=20,
+    ).add_to(map_object)
+    return map_object
+
+
 def get_network(_str_append):
     network = driftmlp.network_from_file(
         "transition_" + _str_append + ".GraphML", visual=False
@@ -29,13 +43,14 @@ class interactive_app:
         to_loc = (lon_to, lat_to)
         path = driftmlp.shortest_path.SingleSP(self.network, from_loc, to_loc)
         if path.sp.travel_time != -1:
-            m = path.plot_folium()
+            m = use_carto_tiles(path.plot_folium())
         else:
             m = folium.Map(
                 location=[lat_from, lon_from],
                 zoom_start=5,
-                tiles="cartodbpositron",
+                tiles=None,
             )
+            use_carto_tiles(m)
         folium.Marker(
             [lat_from, lon_from],
             popup="Starting point",
