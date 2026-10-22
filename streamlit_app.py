@@ -1,3 +1,5 @@
+import os
+
 import pandas as pd
 import streamlit as st
 from streamlit_folium import folium_static
@@ -7,12 +9,15 @@ import folium
 
 
 def use_carto_tiles(map_object):
-    """Replace Folium's default tiles with the same-origin Carto tile proxy."""
+    """Replace Folium's default tiles with the Carto tile proxy."""
+    proxy_base_url = os.environ.get("TILE_PROXY_BASE_URL", "").rstrip("/")
+    tile_path = "/tiles/{z}/{x}/{y}.png"
+    tile_url = f"{proxy_base_url}{tile_path}" if proxy_base_url else tile_path
     for name, layer in list(map_object._children.items()):
         if isinstance(layer, folium.TileLayer):
             del map_object._children[name]
     folium.TileLayer(
-        tiles="/tiles/{z}/{x}/{y}.png",
+        tiles=tile_url,
         attr='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
         name="Carto Positron",
         max_zoom=20,
