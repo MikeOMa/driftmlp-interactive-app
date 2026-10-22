@@ -1,3 +1,4 @@
 streamlit
 streamlit-folium
 driftmlp==1.2
+h3>=3.6.4,<4
