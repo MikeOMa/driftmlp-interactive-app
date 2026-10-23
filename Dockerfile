@@ -1,4 +1,4 @@
-FROM mambaorg/micromamba:1.4.2
+FROM mambaorg/micromamba:1.5.8-bookworm-slim
 
 USER root
 RUN apt-get update && apt-get install -y --no-install-recommends nginx && \
